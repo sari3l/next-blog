@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+}
+
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100vh;
+}
+
+div .alert {
+  background: linear-gradient(
+    -45deg,
+    #f00 0,
+    #f00 0 25%,
+    #000 25%,
+    #000 50%,
+    #f00 0 50%,
+    #f00 0 75%,
+    #000 75%,
+    #000
+  );
+  background-size: 40px 40px;
+}
+div .alert .inner {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+div .alert .inner data {
+  position: relative;
+  width: 200%;
+  height: 100%;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  color: white;
+  font-size: 45px;
+  animation: marquee 10s linear infinite;
+  animation-play-state: running;
+}
+
+div .alert .inner data :hover {
+  animation-play-state: running;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.img-blur {
+  filter: blur(20px);
+}
+
+.unblur {
+  animation: unblur 0.3s linear;
+}
+
+@keyframes unblur {
+  from {
+    filter: blur(20px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
