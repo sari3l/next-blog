@@ -3,7 +3,7 @@ import { LinkStruct, Links } from "@/config/links";
 import Image from "next/image";
 import Friend from "@/components/widget/friend";
 
-const links = () => {
+const socials = () => {
   const socials: { [key: string]: LinkStruct } = {};
   Object.entries(Config.social.links.links).map(([key, value]) => {
     if (key in Links && value != "") {
@@ -16,10 +16,10 @@ const links = () => {
 
 const Social = () => {
   return (
-    <div className="rounded-[15px] w-60  bg-white">
-      <div className="flex flex-col divide-y divide-gray-100">
+    <div className="rounded-[15px] w-60  bg-white dark:bg-gray-900">
+      <div className="flex flex-col divide-y divide-gray-100 dark:divide-gray-900">
         <div className="flex flex-col justify-center items-center pt-5">
-          <div className="relative bg-gray-300 h-32 w-32 overflow-hidden rounded-lg">
+          <div className="relative bg-gray-300 dark:bg-gray-800 h-32 w-32 overflow-hidden rounded-lg">
             <Image fill={true} src={Config.avatar} alt="" />
           </div>
           <div className="py-2">{Config.author}</div>
@@ -27,11 +27,11 @@ const Social = () => {
         </div>
         {Config.social.links.enable && (
           <div className="flex flex-wrap min-h-max justify-center pt-3">
-            {Object.entries(links()).map(([key, link]) => (
+            {Object.entries(socials()).map(([key, link]) => (
               <a
                 href={link.url}
                 key={key}
-                className={`px-3 pb-3 ${
+                className={`px-3 pb-3 dark:invert ${
                   Config.social.responsive && "hover:scale-125 duration-100"
                 }`}
               >

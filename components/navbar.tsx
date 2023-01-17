@@ -6,27 +6,21 @@ const navigation = [
   {
     name: "posts",
     text: "文档",
-    href: "#",
+    href: "/posts",
     current: false,
   },
   {
-    name: "tags",
-    text: "标签",
-    href: "#",
-    current: false,
-  },
-  {
-    name: "about",
-    text: "关于",
-    href: "/about",
+    name: "categories",
+    text: "分类",
+    href: "/categories",
     current: false,
   },
 ];
 
 const Navbar = () => {
   return (
-    <div className="z-50 w-full fixed bg-white bg-opacity-70 backdrop-blur-lg backdrop-saturate-200 lg:px-10 lg:w-screen-lg">
-      <nav className="container-lg flex w-full items-center py-2  border-b border-gray-200">
+    <div className="z-50 w-full fixed bg-gray-300 dark:bg-gray-800 bg-opacity-70 backdrop-blur-lg backdrop-saturate-200 lg:px-10 lg:w-screen-lg">
+      <nav className="container-lg flex w-full items-center py-2">
         <div className="pl-6 min-w-max">
           <Link href="/">{Config.title}</Link>
         </div>

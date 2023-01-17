@@ -29,7 +29,7 @@ const BlurImage: React.FC<BlurImageProps> = (props) => {
       key={this}
       placeholder="blur"
       loading="lazy"
-      blurDataURL={props.base64 ? props.base64 : emptyImage}
+      blurDataURL={props.base64 ?? emptyImage}
       className={
         blur
           ? "img-blur"

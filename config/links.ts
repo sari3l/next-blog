@@ -13,6 +13,7 @@ export type LinkStruct = {
   text: string;
   url?: string;
   color?: string;
+  dark?: string;
   shadow?: string;
   border?: string;
 };
@@ -22,6 +23,7 @@ export const Links: { [key: string]: LinkStruct } = {
     icon: Github,
     text: "Github",
     color: "#000000",
+    dark: "#ffffff",
   },
   twitter: {
     icon: Twitter,

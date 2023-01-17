@@ -4,8 +4,8 @@ import {
   Mdx,
   Vercel,
 } from "@icons-pack/react-simple-icons";
-import theme from "shiki/themes/min-light.json";
 import { Friends } from "./friends";
+const theme = require("shiki/themes/min-light.json");
 
 export const Config = {
   title: "安全测试前端",
@@ -15,14 +15,14 @@ export const Config = {
   descrption: "测试测试",
 
   // 告警标幅
-  alert: {
+  evaWarnning: {
     enable: false,
-    text: "自在观，观自在，无人在，无我在，问此时自家安在？知所在自然自在。",
+    text: "由于传播、利用本博客所提供的信息而造成的任何直接或者间接的后果及损失，均由使用者本人负责，作者不为此承担任何责任。",
   },
 
   // 主页文章设置
   post: {
-    indexLimit: 5,
+    indexLimit: 3,
   },
 
   //** 社交信息 */
@@ -38,7 +38,7 @@ export const Config = {
         zhihu: "sari3l",
         linkedin: "dsti",
       },
-      colorful: false,
+      colorful: true,
       iconSize: 30,
     },
     friends: {

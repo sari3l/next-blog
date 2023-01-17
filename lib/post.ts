@@ -12,9 +12,11 @@ export async function getAllPostPaths() {
 export async function getLatestPosts({
   limit = Infinity,
   order = "desc",
+  pinned = false,
 }: {
   limit?: number;
   order?: "asc" | "desc";
+  pinned?: boolean;
 } = {}) {
   const postsPath = await getAllPostPaths();
   const allPosts = await Promise.all(
@@ -30,14 +32,26 @@ export async function getLatestPosts({
     })
   );
 
-  return take(
-    orderBy(
-      allPosts.filter(({ frontmatter }) => !frontmatter.draft),
-      ({ frontmatter }) => dayjs(frontmatter.date).valueOf(),
-      [order]
-    ),
-    limit
-  );
+  const posts = () => {
+    if (pinned) {
+      return orderBy(
+        allPosts.filter(({ frontmatter }) => !frontmatter.draft),
+        [
+          ({ frontmatter }) => frontmatter.pinned,
+          ({ frontmatter }) => dayjs(frontmatter.date).valueOf(),
+        ],
+        ["asc", order]
+      );
+    } else {
+      return orderBy(
+        allPosts.filter(({ frontmatter }) => !frontmatter.draft),
+        ({ frontmatter }) => dayjs(frontmatter.date).valueOf(),
+        order
+      );
+    }
+  };
+
+  return take(posts(), limit);
 }
 
 export async function getPostFrontmatterBySlug(slug: string) {
@@ -50,4 +64,21 @@ export async function getPostFrontmatterBySlug(slug: string) {
 
 export function getSlugByPostPath(postPath: string) {
   return postPath.replace(/^public\/posts\/|\.mdx$/g, "");
+}
+
+export async function getAdjacentPosts(slug: string) {
+  const posts = await getLatestPosts({ order: "asc" });
+  const idx = posts.findIndex((post) => post.slug === slug);
+  const prevPosts = idx > 0 ? posts[idx - 1] : undefined;
+  const nextPosts =
+    idx !== -1 && idx < posts.length - 1 ? posts[idx + 1] : undefined;
+
+  return {
+    prev: prevPosts
+      ? { slug: prevPosts.slug, frontmatter: prevPosts.frontmatter }
+      : undefined,
+    next: nextPosts
+      ? { slug: nextPosts.slug, frontmatter: nextPosts.frontmatter }
+      : undefined,
+  };
 }

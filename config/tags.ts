@@ -6,6 +6,9 @@ export type TagStruct = {
 
 export const Tags: { [key: string]: TagStruct } = {
   test: {
-    color: "#3354f8",
+    color: "text-green-100",
+  },
+  mdx: {
+    color: "#000000",
   },
 };

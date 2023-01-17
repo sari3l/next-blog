@@ -2,10 +2,17 @@ import path from "path";
 import { bundleMDX } from "mdx-bundler";
 import remarkGfm from "remark-gfm";
 import remarkToc from "remark-toc";
+import remarkDirective from "remark-directive";
 import rehpyeImageMeta from "@/lib/plugins/rehypeImage";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { remarkCodeHike } from "@code-hike/mdx";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { getAllPostPaths, getSlugByPostPath } from "@/lib/post";
+import {
+  getAdjacentPosts,
+  getAllPostPaths,
+  getSlugByPostPath,
+} from "@/lib/post";
 import PostLayout from "@/components/layout/postLayout";
 import { Config } from "@/config/config";
 
@@ -65,18 +72,36 @@ export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({
         ],
         [remarkGfm],
         [remarkToc],
+        [remarkDirective],
       ];
       // https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         [rehpyeImageMeta],
+        [rehypeSlug],
+        [
+          rehypeAutolinkHeadings,
+          { behavior: "wrap", properties: { class: "anchor" } },
+        ],
       ];
 
       return options;
     },
   });
 
-  return { props: { code, frontmatter } };
+  const { prev, next } = await getAdjacentPosts(slug);
+  return {
+    props: {
+      code,
+      frontmatter,
+      prevPost: prev
+        ? { link: `/posts/${prev.slug}`, title: prev.frontmatter.title }
+        : null,
+      nextPost: next
+        ? { link: `/posts/${next.slug}`, title: next.frontmatter.title }
+        : null,
+    },
+  };
 };
 
 export default PostLayout;

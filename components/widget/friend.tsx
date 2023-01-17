@@ -24,7 +24,7 @@ const FriendCard: React.FC<FriendStruct> = (friend) => {
     }
 
     return (
-      <span className="flex items-center py-1 px-3 m-2 border-2 hover:rounded-md hover:scale-15 border-white hover:border-gray-100">
+      <span className="flex items-center py-1 px-3 m-2 border-2 hover:rounded-md hover:scale-15 border-white hover:border-gray-100 dark:border-gray-900 dark:hover:border-gray-600">
         <div className="basis-1/6 flex items-center justify-center">
           <div className="relative rounded-full overflow-hidden h-10 w-10">
             <Image fill={true} src={friend.imgUrl} alt={friend.url} />

@@ -8,7 +8,7 @@ const Quote: React.FC<PropsWithChildren> = (props) => {
             before:content-['❝'] before:text-4xl before:font-bold before:leading-8
             after:content-['❞'] after:text-2xl after:text-gray-500 after:flex after:items-end"
     >
-      <blockquote className="italic px-1 text-md leading-7 text-gray-500 dark:text-true-gray-50 ">
+      <blockquote className="italic px-1 text-md leading-7 text-gray-500 dark:text-gray-200 ">
         {children}
       </blockquote>
     </div>

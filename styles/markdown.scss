@@ -1,38 +1,39 @@
+h1:not([class~="title"]),
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold before:content-['#_'] before:text-red-500 before:hover:text-teal-400;
+}
+h1 {
+  @apply text-4xl mt-14 mb-10;
+}
+h2 {
+  @apply text-3xl mt-12 mb-8;
+}
+h3 {
+  @apply text-2xl mt-8 mb-6;
+}
+h4 {
+  @apply text-xl mt-7 mb-5;
+}
+h5 {
+  @apply text-base mt-6 mb-4;
+}
+h6 {
+  @apply text-sm mt-5 mb-3;
+}
+h1 + *,
+h2 + *,
+h3 + *,
+h4 + *,
+h5 + *,
+h6 + * {
+  @apply mt-0;
+}
+
 .markdown {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-bold;
-  }
-  h1 {
-    @apply text-4xl mt-14 mb-10;
-  }
-  h2 {
-    @apply text-3xl mt-12 mb-8;
-  }
-  h3 {
-    @apply text-2xl mt-8 mb-6;
-  }
-  h4 {
-    @apply text-xl mt-7 mb-5;
-  }
-  h5 {
-    @apply text-base mt-6 mb-4;
-  }
-  h6 {
-    @apply text-sm mt-5 mb-3;
-  }
-  h1 + *,
-  h2 + *,
-  h3 + *,
-  h4 + *,
-  h5 + *,
-  h6 + * {
-    @apply mt-0;
-  }
   pre {
     @apply border-blue-100 border-4 rounded-md;
   }
@@ -43,11 +44,17 @@
   }
   del {
   }
-  p {
-    @apply leading-8;
-  }
+
   a {
-    @apply text-indigo-600 font-medium underline decoration-indigo-600 hover:brightness-75 transition;
+    &:not([class~="anchor"]) {
+      @apply text-indigo-600 font-medium underline decoration-indigo-600 hover:brightness-75 transition dark:text-blue-400 dark:hover:brightness-125;
+    }
+    &[class~="tag"] {
+      @apply rounded-[10px] text-blue-500 bg-blue-100 hover:text-blue-700 px-2 py-1 no-underline before:content-['#'];
+    }
+    &[class~="post"] {
+      @apply no-underline text-black;
+    }
   }
 
   code:not([class="ch-code-scroll-parent"]) {
@@ -66,57 +73,39 @@
       @apply border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400;
     }
   }
+  p {
+    @apply leading-8;
+  }
 
   ul,
   ol {
-    @apply pl-4;
-    p {
-      @apply m-0;
+    @apply ml-4 text-slate-700 dark:text-slate-400;
+    li {
+      @apply my-3 ml-1;
     }
   }
-  ul:not(:has(> li.task-list-item)) {
+  hr {
+    @apply my-5 dark:border-gray-900;
   }
+
   ol {
     counter-reset: list-item;
     > li {
       counter-increment: list-item;
       &::before {
-        @apply mr-2 font-medium;
+        @apply mx-1 mr-2 font-medium;
         content: counter(list-item) ". ";
         min-width: 20px;
         font-feature-settings: "tnum";
       }
     }
   }
-  input[type="checkbox"] {
-    appearance: none;
-    background-color: #fff;
-    margin: 0;
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid;
-    border-radius: 100%;
-    display: inline-grid;
-    place-content: center;
-    &::before {
-      content: " ";
-      width: 0.65em;
-      height: 0.65em;
-      border-radius: 100%;
-      transform: scale(0);
-      transition: 120ms transform ease-in-out;
-      box-shadow: inset 1em 1em #000000;
-    }
-    &:checked::before {
-      transform: scale(1);
-    }
-  }
-
-  .tag {
-    @apply rounded-[10px] text-blue-500 bg-blue-100 hover:text-blue-700 px-2 py-1 no-underline;
-  }
 
   .checkbox {
     @apply w-10 h-10;
+  }
+
+  em {
+    @apply dark:text-gray-400;
   }
 }
